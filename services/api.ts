@@ -6,7 +6,7 @@ let isRefreshing = false;
 let failedRequestsQueue = [];
 
 export function setupAPIClient(ctx = undefined) {
-  let cookies = parseCookies();
+  let cookies = parseCookies(ctx);
 
   const api = axios.create({
     baseURL: 'http://localhost:3333',
@@ -20,7 +20,7 @@ export function setupAPIClient(ctx = undefined) {
   }, (error: AxiosError) => {
     if (error.response.status === 401) {
       if (error.response.data?.code === 'token.expired') {
-        cookies = parseCookies();
+        cookies = parseCookies(ctx);
 
         const { 'nextauth.refreshToken': refreshToken } = cookies;
         const originalConfig = error.config
@@ -33,12 +33,12 @@ export function setupAPIClient(ctx = undefined) {
           }).then(response => {
             const { token } = response.data;
 
-            setCookie(undefined, 'nextauth.token', token, {
+            setCookie(ctx, 'nextauth.token', token, {
               maxAge: 60 * 60 * 24 * 30, // tretti dager
               path: '/'
             })
 
-            setCookie(undefined, 'nextauth.refreshToken', response.data.refreshToken, {
+            setCookie(ctx, 'nextauth.refreshToken', response.data.refreshToken, {
               maxAge: 60 * 60 * 24 * 30, // tretti dager
               path: '/'
             })
