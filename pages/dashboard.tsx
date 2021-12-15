@@ -6,10 +6,10 @@ import { api } from "../services/apiClient";
 import { withSSRAuth } from "../utils/withSSRAuth";
 
 export default function Dashboard() {
-  const { user } = useContext(AuthContext);
+  const { user, isAuthenticated } = useContext(AuthContext);
 
   const userCanSeeMetrics = useCan({
-    permissions: ["metrics.list"],
+    roles: ["administrator", "editor"],
   });
 
   useEffect(() => {
