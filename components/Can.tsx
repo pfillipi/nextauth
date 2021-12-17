@@ -10,5 +10,9 @@ interface CanProps {
 export function Can({ children, permissions, roles }: CanProps) {
   const userCanSeeComponent = useCan({ permissions, roles });
 
-  if (!userCanSeeComponent) return <>{children}</>;
+  if (!userCanSeeComponent) {
+    return null;
+  }
+
+  return <>{children}</>;
 }
