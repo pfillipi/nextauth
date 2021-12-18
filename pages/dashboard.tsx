@@ -8,10 +8,6 @@ import { withSSRAuth } from "../utils/withSSRAuth";
 export default function Dashboard() {
   const { user, isAuthenticated } = useContext(AuthContext);
 
-  const userCanSeeMetrics = useCan({
-    roles: ["administrator", "editor"],
-  });
-
   useEffect(() => {
     api.get("/me").then((response) => console.log(response));
   }, []);
@@ -19,8 +15,9 @@ export default function Dashboard() {
   return (
     <>
       <h1>Dashboard: {user?.email}</h1>
-
-      {userCanSeeMetrics && <div>Beregninger</div>}
+      <Can>
+        <div>Beregninger</div>
+      </Can>
     </>
   );
 }
