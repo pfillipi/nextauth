@@ -6,4 +6,6 @@ interface CanProps {
   roles?: string[];
 }
 
-export function Can({ children, permissions, roles }: CanProps) {}
+export function Can({ children, permissions, roles }: CanProps) {
+  return <>{children}</>;
+}
