@@ -2,8 +2,8 @@ import { ReactNode } from "react";
 
 interface CanProps {
   children: ReactNode;
-  permission?: string[];
-  role?: string[];
+  permissions?: string[];
+  roles?: string[];
 }
 
-export function Can({}: CanProps) {}
+export function Can({ children, permissions, roles }: CanProps) {}
