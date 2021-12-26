@@ -9,7 +9,7 @@ export default function Dashboard() {
   const { user, isAuthenticated } = useContext(AuthContext);
 
   const userCanSeeMetrics = useCan({
-    roles: ["administrator", "editor"],
+    roles: ["editor"],
   });
 
   useEffect(() => {
