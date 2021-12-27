@@ -19,7 +19,7 @@ export const getServerSideProps = withSSRAuth(
     };
   },
   {
-    permissions: ["metrics.listX"],
+    permissions: ["metrics.list"],
     roles: ["administrator"],
   }
 );
