@@ -46,7 +46,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
     authChannel = new BroadcastChannel("auth");
 
     authChannel.onmessage = (message) => {
-      console.log(message);
+      switch (message.data) {
+        case "signOut":
+          signOut();
+          break;
+        default:
+          break;
+      }
     };
   }, []);
 
@@ -95,7 +101,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
       Router.push("/dashboard");
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }
