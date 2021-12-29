@@ -27,6 +27,8 @@ type AuthProviderProps = {
 
 export const AuthContext = createContext({} as AuthContextData);
 
+const authChannel = new BroadcastChannel("auth");
+
 export function signOut() {
   destroyCookie(undefined, "nextauth.token");
   destroyCookie(undefined, "nextauth.refreshToken");
